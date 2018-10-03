@@ -6,6 +6,8 @@
   the parent directory name and a '/i' so that names in the tabs are
   more useful when looking at multiple index.js files.
 
+![Jim Screenshot](https://raw.github.com/jimmoy/tabline.vim/master/screenshots/index-tabs.png)
+
 <img src="https://mkitt.net/apple-touch-icon.png" width="80px" height="80px" />
 
 # tabline.vim
