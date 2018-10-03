@@ -8,6 +8,9 @@
 "              Want To Public License, Version 2, as published by Sam Hocevar.
 "              See http://sam.zoy.org/wtfpl/COPYING for more details.
 " Based On:    http://www.offensivethinking.org/data/dotfiles/vimrc
+" Updates:     Jim Moy <jim@jimmoy.com> 2018-10-03
+"              Tweaks so I'm not looking at a dozen index.js files, etc.
+"              Personal preferences.
 
 " Bail quickly if the plugin was loaded, disabled or compatible is set
 if (exists("g:loaded_tabline_vim") && g:loaded_tabline_vim) || &cp
@@ -25,13 +28,33 @@ function! Tabline()
     let bufname = bufname(bufnr)
     let bufmodified = getbufvar(bufnr, "&mod")
 
+    let filename = fnamemodify(bufname, ':t')
+
+    if filename == 'index.js'
+      let dispname = fnamemodify(bufname, ':p:h:t') . '/i'
+    elseif filename == 'view.js'
+      let dispname = fnamemodify(bufname, ':p:h:t') . '/v'
+    elseif filename == 'style.js' || filename == 'styles.js'
+      let dispname = fnamemodify(bufname, ':p:h:t') . '/s'
+    elseif filename == 'component.js' || filename == 'components.js'
+      let dispname = fnamemodify(bufname, ':p:h:t') . '/c'
+    elseif filename == 'enhancer.js' || filename == 'enhancers.js'
+      let dispname = fnamemodify(bufname, ':p:h:t') . '/e'
+    elseif filename == 'helper.js' || filename == 'helpers.js'
+      let dispname = fnamemodify(bufname, ':p:h:t') . '/h'
+    elseif filename == 'query.js' || filename == 'queries.js'
+      let dispname = fnamemodify(bufname, ':p:h:t') . '/q'
+    else
+      let dispname = fnamemodify(bufname, ':t')
+    endif
+
     let s .= '%' . tab . 'T'
     let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
-    let s .= ' ' . tab .':'
-    let s .= (bufname != '' ? fnamemodify(bufname, ':t') . ' ' : '[No Name] ')
+    let s .= ' ' . tab .' '
+    let s .= (bufname != '' ? dispname . ' ' : '[unnamed] ')
 
     if bufmodified
-      let s .= '[+] '
+      let s .= '* '
     endif
   endfor
 
