@@ -1,3 +1,10 @@
+# Changes in this fork
+
+- No colon after number, just space
+- No square brackets around the file name
+- Take common JavaScript file names like index.js and reduce them to
+  the parent directory name and a '/i' so that names in the tabs are
+  more useful when looking at multiple index.js files.
 
 <img src="https://mkitt.net/apple-touch-icon.png" width="80px" height="80px" />
 
